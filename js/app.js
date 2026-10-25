@@ -60,7 +60,7 @@
       b.className = 'tab';
       b.setAttribute('role', 'tab');
       b.setAttribute('aria-selected', id === S.topic);
-      b.innerHTML = `<small>${TOPICS[id].week}</small><b>${TOPICS[id].name}</b>`;
+      b.innerHTML = `<b>${TOPICS[id].name}</b>`;
       b.onclick = () => { S.topic = id; buildTabs(); buildPanel(); rebuild(0); };
       el.tabs.appendChild(b);
     });
