@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSE 317 Live Lab</title>
+
+  <!-- Fonts from Google Fonts (the page still works offline, it just uses system fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="eyebrow">CSE 317 · Numerical Methods · Live Lab</div>
+      <h1>Watch the method <em>work</em>, one iteration at a time.</h1>
+      <p class="lede">Pick a topic, type any f(x), and step through the algorithm. The graph redraws after every iteration. Click the graph to move the starting point.</p>
+    </header>
+
+    <!-- Topic tabs are created by js/app.js from the files in js/topics/ -->
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Topics"></nav>
+
+    <main class="work">
+
+      <!-- LEFT: the graph, the play controls and the explanation -->
+      <section class="stage">
+        <div class="canvas-wrap">
+          <canvas id="cv" aria-label="Live graph of the method"></canvas>
+          <div class="legend" id="legend"></div>
+          <div class="hint" id="hint"></div>
+        </div>
+
+        <div class="transport">
+          <button class="btn" id="bReset" title="Back to start">⟲ Reset</button>
+          <button class="btn" id="bBack" title="Previous step (←)">◀ Back</button>
+          <button class="btn primary" id="bPlay" title="Play / pause (Space)">▶ Play</button>
+          <button class="btn" id="bNext" title="Next step (→)">Next ▶</button>
+          <select class="speed" id="speed" aria-label="Playback speed">
+            <option value="1500">Slow</option>
+            <option value="850" selected>Normal</option>
+            <option value="350">Fast</option>
+          </select>
+          <span class="counter" id="counter"></span>
+        </div>
+
+        <div class="explain">
+          <div class="rule" id="rule"></div>
+          <p class="blurb" id="blurb"></p>
+          <p class="say" id="say"></p>
+        </div>
+      </section>
+
+      <!-- RIGHT: inputs and the iteration table -->
+      <aside class="side">
+        <div class="panel">
+          <h2>Function</h2>
+          <div class="fx">
+            <span>f(x) =</span>
+            <input id="fx" spellcheck="false" autocomplete="off" aria-label="f(x)">
+          </div>
+          <select class="preset" id="preset" aria-label="Example functions"></select>
+          <div class="deriv" id="deriv"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Method</h2>
+          <div class="seg" id="methods"></div>
+          <div class="grid2" id="params"></div>
+          <div class="grid2">
+            <div class="fld"><label for="vx0">View x from</label><input id="vx0"></div>
+            <div class="fld"><label for="vx1">View x to</label><input id="vx1"></div>
+          </div>
+          <p class="note">Inputs accept expressions like <code>pi/2</code> or <code>sqrt(2)</code>.</p>
+          <div class="err" id="err" hidden></div>
+        </div>
+
+        <div class="panel">
+          <h2>Iteration log</h2>
+          <div class="tbl-wrap" id="tblwrap"><table id="tbl"></table></div>
+        </div>
+      </aside>
+
+    </main>
+
+    <footer>CSE 317 Live Lab · built by Sadman Mahmood, IUB · Autumn 2026</footer>
+  </div>
+
+  <!--
+    SCRIPT ORDER MATTERS:
+    1. math.js (the maths library, loaded from a CDN)
+    2. helpers + plot (shared tools every topic uses)
+    3. one file per topic (each one adds itself to TOPICS)
+    4. app.js last (it builds the page from TOPICS)
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+  <script src="js/helpers.js"></script>
+  <script src="js/plot.js"></script>
+  <script src="js/topics/taylor.js"></script>
+  <script src="js/topics/roots.js"></script>
+  <script src="js/topics/optimization.js"></script>
+  <script src="js/topics/integration.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
